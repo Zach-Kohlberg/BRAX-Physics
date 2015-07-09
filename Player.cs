@@ -6,7 +6,7 @@ public class Player : PhysicsObject {
 	//Public Variables for the Inspector
 	public float horizontalSpeed = 3f, jumpSpeed = 10f, gravitySpeed = 15f, jumpAscensionTimer = .5f;
 
-	private int inputHorizontal, inputVertical;// Horizontal: 1 = Right, -1 = Left, 0 = nothing. Vertical: 2 = Jump, 1 = Ascend, -1 = Nothing/Normal Gravity, -2 = FallFast, -3 = Slam
+	private int inputHorizontal, inputVertical;// Horizontal: 1 = Right, -1 = Left, 0 = nothing. Vertical: 2 = Jump, 1 = Ascend, 0 = Nothing/Normal Gravity, -1 = FallFast, -2 = Slam
 	private bool jumping, fallingFast, vertPressedDown;//is the player currently jumping? Is the player currently fallingfast? Did we just receive vertical input?
 	
 
@@ -97,7 +97,7 @@ public class Player : PhysicsObject {
 			{
 				fallingFast = true;
 				vertPressedDown = true;
-				inputVertical = -3;
+				inputVertical = -2;
 			}
 
 			//Debug.Log("Vertical Button has been pressed: " + vertY);
@@ -114,7 +114,7 @@ public class Player : PhysicsObject {
 			}
 			else if (vertY < 0)
 			{
-				inputVertical = -2;
+				inputVertical = -1;
 			}
 
 			//Debug.Log("Vertical Button has been Held: " + vertY);
@@ -122,7 +122,7 @@ public class Player : PhysicsObject {
 		//The player is giving no input for vertical movement.
 		else if (/*vertY == 0 &&*/ !vertPressedDown && !vertYHeld)
 		{
-			inputVertical = -1;
+			inputVertical = 0;
 		}
 
 		vertPressedDown = false;
@@ -136,6 +136,7 @@ public class Player : PhysicsObject {
 		Speed_Horizontal = horizontalSpeed;
 		Speed_Gravity = gravitySpeed;
 		Speed_Jump = jumpSpeed;
+		JumpAmount = 1;
 		JumpAscensionTimer = jumpAscensionTimer;
 		CanJump = true;
 	}
