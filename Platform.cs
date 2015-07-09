@@ -13,23 +13,28 @@ public class Platform : PhysicsObject {
         //time_Switch = 3f;
         Speed_Horizontal = spd_h;
         time_SwitchUsed = 0;
-        PhysicsObject_Initialize();
+        PhysicsObjectInitialize();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (time_SwitchUsed < time_Switch)
-        {
-            PhysicsObject_Move(dir, 0, false);
-
-            time_SwitchUsed += Time.deltaTime;
-            if (time_SwitchUsed >= time_Switch)
-            {
-                time_SwitchUsed = 0;
-                dir *= -1;
-            }
-        }
         
+        
+	}
+
+	void FixedUpdate()
+	{
+		if (time_SwitchUsed < time_Switch)
+		{
+			PhysicsObject_Move(dir, 0, false);
+
+			time_SwitchUsed += Time.fixedDeltaTime;
+			if (time_SwitchUsed >= time_Switch)
+			{
+				time_SwitchUsed = 0;
+				dir *= -1;
+			}
+		}
 	}
 }
